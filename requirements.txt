@@ -1,0 +1,12 @@
+python==3.12.2
+pandas==2.2.3
+numpy==2.2.2
+matplotlib==3.10.0
+matplotlib-venn==1.1.2
+uncertainties == 3.2.2
+
+## Run the following command to install the packages
+# sudo passwd root
+# python3 -m venv ~/myenv
+# source ~/myenv/bin/activate
+# pip install -r requirements.txt

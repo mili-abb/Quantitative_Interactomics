@@ -1,15 +1,13 @@
 import pandas as pd
 import numpy as np
+import matplotlib
 import matplotlib.pyplot as plt
-import matplotlib.ticker as ticker
 from matplotlib_venn import venn2
 
-import seaborn as sns
 import os
-import subprocess
-import math
 from scipy.optimize import curve_fit
 from scipy import stats
+
 
 try:
     import uncertainties.unumpy as unp
