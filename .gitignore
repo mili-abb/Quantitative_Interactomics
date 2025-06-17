@@ -1,0 +1,19 @@
+# --- FICHIERS PYTHON ---
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+
+# --- NOTEBOOKS TEMPORAIRES ---
+*.ipynb_checkpoints/
+
+# --- FICHIERS CACHE ---
+.cache/
+*.log
+
+# --- CONFIGS LOCALES ---
+.env
+*.env
+.DS_Store
+.vscode/
+.idea/
