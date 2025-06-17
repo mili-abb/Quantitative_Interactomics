@@ -3,7 +3,7 @@ pandas==2.2.3
 numpy==2.2.2
 matplotlib==3.10.0
 matplotlib-venn==1.1.2
-uncertainties == 3.2.2
+uncertainties== 3.2.2
 
 ## Run the following command to install the packages
 # sudo passwd root
