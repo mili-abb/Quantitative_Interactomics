@@ -1,0 +1,10 @@
+Motif	Unique_Protein_Count	Frequency
+motif1	4198	0.2056
+motif2	3684	0.1804
+motif3	13933	0.6824
+motif4	2053	0.1006
+motif5	818	0.0401
+motif6	31	0.0015
+motif7	378	0.0185
+motif8	11	0.0005
+motif9	8	0.0004
