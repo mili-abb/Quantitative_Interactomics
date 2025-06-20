@@ -1,6 +1,6 @@
 import os
-from file_op import read_csv_file, extract_species_and_bait
-from calcul import calculate_Kapp, get_bait_concentration, add_complexome_column
+from lib.file_op import read_csv_file, extract_species_and_bait
+from lib.calcul import calculate_Kapp, get_bait_concentration, add_complexome_column
 
 def main():
     # === Étape 1 : Charger le fichier de données ===
