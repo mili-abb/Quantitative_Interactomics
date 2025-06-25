@@ -103,3 +103,31 @@ def calculate_complexome(df, filepath):
         print(f"❌ Error in add_complexome_column: {e}")
 
     return df
+
+
+####### Log Scale for Concentration and complexome ###########
+
+def log_scale(df, epsilon=1e-5):
+    """
+    Apply log10 transformation to columns based on suffix patterns:
+    - log10 on: '*_concentration_uM', '*_complexome'
+    - skip: '*_delta_pKapp' and unrelated columns
+
+    Parameters:
+        df (pd.DataFrame): DataFrame with flat columns
+        epsilon (float): Small value to avoid log(0)
+
+    Returns:
+        pd.DataFrame: Updated DataFrame with log-transformed columns
+    """
+    df = df.copy()
+
+    for col in df.columns:
+
+        col_data = pd.to_numeric(df[col], errors='coerce')
+
+        if col.endswith("concentration_uM") or col.endswith("complexome"):
+            safe_vals = np.where(col_data <= 0, epsilon, col_data)
+            df[f"log_{col}"] = np.log10(safe_vals)
+
+    return df

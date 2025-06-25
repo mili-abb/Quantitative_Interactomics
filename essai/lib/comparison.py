@@ -79,19 +79,16 @@ def calculate_complexome_difference(df):
 
 ###################### Log Scale Transformations ##########################################
 
-def apply_log_transformation(df, target_metric_keywords=("delta_pKapp", "delta_complexome"), epsilon=1e-5):
+def log_delta(df, epsilon=1e-5):
     """
-    Apply log10 transformation to selected multi-index columns:
-    - log10 on: 'concentration_uM', 'complexome'
-    - signed log10 on: 'delta_complexome'
-    - skip: delta_pKapp and unrelated metrics
+    Apply signed log10 transformation ONLY to 'delta_complexome' in a MultiIndex-column DataFrame.
 
     Parameters:
-        df (DataFrame): MultiIndex column DataFrame
-        epsilon (float): Value to avoid log(0)
+        df (DataFrame): DataFrame with MultiIndex columns (species, bait_comparison, metric)
+        epsilon (float): Value to avoid log10(0)
 
     Returns:
-        DataFrame: Updated DataFrame with log-transformed columns
+        DataFrame: Updated DataFrame with new 'log_delta_complexome' columns
     """
 
     df = df.copy()
@@ -103,30 +100,13 @@ def apply_log_transformation(df, target_metric_keywords=("delta_pKapp", "delta_c
 
         species, subkey, metric = col
 
-        # Skip delta_pKapp
-        if metric == "delta_pKapp":
-            continue
-
-        col_data = pd.to_numeric(df[col], errors='coerce')
-
-        # Special case: signed log for delta_complexome
         if metric == "delta_complexome":
+            col_data = pd.to_numeric(df[col], errors='coerce')
             safe_abs = np.where(col_data == 0, epsilon, np.abs(col_data))
             signed_log = np.sign(col_data) * np.log10(safe_abs)
             log_col = (species, subkey, "log_delta_complexome")
             df[log_col] = signed_log
-
-        # Standard log for concentration or complexome
-        elif metric in ["concentration_uM", "complexome"]:
-            safe_vals = np.where(col_data <= 0, epsilon, col_data)
-            log_vals = np.log10(safe_vals)
-            log_col = (species, subkey, f"log_{metric}")
-            df[log_col] = log_vals
         
-        # Skip everything else (like pKapp, Kapp, etc.)
-        else:
-            continue
-
     return df
       
 
